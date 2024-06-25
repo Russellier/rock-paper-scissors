@@ -57,4 +57,20 @@ function playRound(computerChoice, humanChoice) {
   console.log('Computer: ' + computerScore + '   Human: ' + humanScore);
 }
 
-playRound();
+function playGame() {
+  for (let i = 0; i < 5; i++) {
+    playRound(getComputerChoice(), getHumanChoice());
+  }
+
+  if (computerScore > humanScore) {
+    console.log('Computer WINS!');
+  }
+  else if (computerScore < humanScore) {
+    console.log('Human WINS!');
+  }
+  else {
+    console.log('Draw. No winner');
+  }
+}
+
+playGame();
