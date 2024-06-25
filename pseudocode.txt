@@ -1,0 +1,21 @@
+Create function: getComputerChoice
+  Use Math.random to randomly generate a number from 0-2
+    Use CASE SWITCH
+      Assign 0 to rock, 1 to paper, 2 to scissors
+    Return string
+
+Create function: getHumanChoice
+  Use PROMPT method
+  Assume user will follow instruction
+  Make getHumanChoice case insensitive: use .toLowerCase()
+
+Declare and initialize scores to 0
+  Use variables: humanScore and computerScore
+
+Create function: playRound with 2 parameters: getComputerChoice and getHumanChoice
+  Output to console.log() Ex.: 'You lose. Paper beats Rock'
+  Increment humanScore or computerScore depending on winner
+
+Create function: playGame 
+  Move playRound inside playGame
+  Call playGame 5 times
