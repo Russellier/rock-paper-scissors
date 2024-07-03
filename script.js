@@ -48,43 +48,46 @@ function getHumanChoice(e) {
 // }
 
 let computerScore = 0;
-let humanScore = 0;
+let playerScore = 0;
 
 function playRound(computerChoice, humanChoice) {
 
-  const score = document.querySelector('.score');
+  const scoreBox = document.querySelector('.score');
   const displayWinner = document.createElement('div');
+  const displayScore = document.createElement('p');
   const existingWinner = document.querySelector('.score div');
+  const existingScore = document.querySelector('.score p');
 
   if (existingWinner) {
-    score.removeChild(existingWinner);
+    scoreBox.removeChild(existingWinner);
+  }
+
+  if(existingScore) {
+    scoreBox.removeChild(existingScore);
   }
 
   if ((computerChoice === 'rock' && humanChoice === 'paper') ||
   (computerChoice === 'paper' && humanChoice === 'scissors') ||
   (computerChoice === 'scissors' && humanChoice === 'rock')) {
-    console.log('You win!');
     displayWinner.textContent = 'You won'
-    humanScore++;
+    playerScore++;
   } else if ((computerChoice === 'rock' && humanChoice === 'scissors') ||
   (computerChoice === 'paper' && humanChoice === 'rock') || 
   (computerChoice === 'scissors' && humanChoice === 'paper')) {
-    console.log('You lose!');
     displayWinner.textContent = 'You lost'
     computerScore++;
   } else {
-    console.log('DRAW!');
     displayWinner.textContent = 'Draw'
   }
+  
+  displayScore.textContent = `Computer: ${computerScore}      Player: ${playerScore}`;
+  scoreBox.appendChild(displayScore);
+  scoreBox.insertBefore(displayWinner, document.querySelector('.score p'));
 
-  score.insertBefore(displayWinner, document.querySelector('.score p'));
-
-  if (computerScore === 3 || humanScore === 3) {
-    console.log(computerScore > humanScore ? 'Game over. Computer wins!' :
+  if (computerScore === 3 || playerScore === 3) {
+    console.log(computerScore > playerScore ? 'Game over. Computer wins!' :
       'Game over. You win!');
   }
-
-  console.log('Computer: ' + computerScore + '   Human: ' + humanScore);
 }
 
 const playersOptions = document.querySelectorAll('.players-options button');
