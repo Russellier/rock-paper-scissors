@@ -6,10 +6,11 @@ function getComputerChoice() {
   const existingImage = document.querySelector('.computers-choice img');
   let randomNumber = Math.floor(Math.random() * 3);
   let computerChoice;
+
   if (existingImage) {
-    console.log("There's an image");
     imgContainer.removeChild(existingImage);
   }
+
   switch(randomNumber) {
     case 0:
       computerChoice = 'rock';
@@ -27,6 +28,7 @@ function getComputerChoice() {
       imgOfComputerChoice.style.transform = 'rotate(-90deg)';
       break;
   }
+
   imgContainer.appendChild(imgOfComputerChoice);
   return computerChoice;
 }
@@ -49,33 +51,33 @@ let computerScore = 0;
 let humanScore = 0;
 
 function playRound(computerChoice, humanChoice) {
-  if (computerChoice === 'rock' && humanChoice === 'paper') {
-    console.log('You win! Paper beats rock.');
+
+  const score = document.querySelector('.score');
+  const displayWinner = document.createElement('div');
+  const existingWinner = document.querySelector('.score div');
+
+  if (existingWinner) {
+    score.removeChild(existingWinner);
+  }
+
+  if ((computerChoice === 'rock' && humanChoice === 'paper') ||
+  (computerChoice === 'paper' && humanChoice === 'scissors') ||
+  (computerChoice === 'scissors' && humanChoice === 'rock')) {
+    console.log('You win!');
+    displayWinner.textContent = 'You won'
     humanScore++;
-  }
-  else if (computerChoice === 'rock' && humanChoice === 'scissors') {
-    console.log('You lose! Rock beats scissors.');
+  } else if ((computerChoice === 'rock' && humanChoice === 'scissors') ||
+  (computerChoice === 'paper' && humanChoice === 'rock') || 
+  (computerChoice === 'scissors' && humanChoice === 'paper')) {
+    console.log('You lose!');
+    displayWinner.textContent = 'You lost'
     computerScore++;
-  }
-  else if (computerChoice === 'paper' && humanChoice === 'rock') {
-    console.log('You lose! Paper beats rock.');
-    computerScore++;
-  }
-  else if (computerChoice === 'paper' && humanChoice === 'scissors') {
-    console.log('You win! Scissors beats paper.');
-    humanScore++;
-  }
-  else if (computerChoice === 'scissors' && humanChoice === 'rock') {
-    console.log('You win! Rock beats scissors.');
-    humanScore++;
-  }
-  else if (computerChoice === 'scissors' && humanChoice === 'paper') {
-    console.log('You lose! Scissors beats paper.');
-    computerScore++;
-  }
-  else {
+  } else {
     console.log('DRAW!');
+    displayWinner.textContent = 'Draw'
   }
+
+  score.insertBefore(displayWinner, document.querySelector('.score p'));
 
   if (computerScore === 3 || humanScore === 3) {
     console.log(computerScore > humanScore ? 'Game over. Computer wins!' :
@@ -94,8 +96,3 @@ playersOptions.forEach((choice) => {
     playRound(computerChoice, humanChoice);
   });
 });
-
-const score = document.querySelector('.score');
-const displayWinner = document.createElement('div');
-displayWinner.textContent = 'insert winner here'
-score.appendChild(displayWinner);
