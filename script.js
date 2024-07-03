@@ -6,7 +6,7 @@ function getComputerChoice() {
   const existingImage = document.querySelector('.computers-choice img');
   let randomNumber = Math.floor(Math.random() * 3);
   let computerChoice;
-  
+
   if (gameOver) {
     return;
   }
@@ -118,4 +118,9 @@ playersOptions.forEach((choice) => {
     const humanChoice = getHumanChoice(e);
     playRound(computerChoice, humanChoice);
   });
+});
+
+const restartBtn = document.querySelector('.restart-button');
+restartBtn.addEventListener('click', () => {
+  location.reload();
 });
