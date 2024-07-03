@@ -91,11 +91,13 @@ button:active {
 .score {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   margin: 30px auto;
   width: 200px;
-  height: 65px;
+  min-height: 65px;
+  padding: 10px;
   font-size: 15px;
   color: #0ff;
   border: 3px solid #0ff;
@@ -119,6 +121,9 @@ button:active {
 }
 
 .computers-choice div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 20px 40px;
   height: 140px;
   width: 140px;
@@ -135,6 +140,12 @@ button:active {
   color: white;
   flex-shrink: 0;
   box-shadow: inset 0 0 10px 5px #0ff;
+}
+
+img {
+  height: 65px;
+  width: auto;
+  filter: grayscale(100%);
 }
 
 .circle img {
@@ -251,6 +262,11 @@ button:active {
     margin-bottom: 15px;
   }
 
+  img {
+    height: 50px;
+    width: auto;
+  }
+
   .rock img {
     width: 21px;
     height: auto;
@@ -264,6 +280,5 @@ button:active {
 
   .score {
     width: 190px;
-    height: 40px;
   }
 }

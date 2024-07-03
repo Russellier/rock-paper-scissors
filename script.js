@@ -1,19 +1,33 @@
 "use strict";
 
 function getComputerChoice() {
+  const imgContainer = document.querySelector('.computers-choice div');
+  const imgOfComputerChoice = document.createElement('img');
+  const existingImage = document.querySelector('.computers-choice img');
   let randomNumber = Math.floor(Math.random() * 3);
   let computerChoice;
+  if (existingImage) {
+    console.log("There's an image");
+    imgContainer.removeChild(existingImage);
+  }
   switch(randomNumber) {
     case 0:
       computerChoice = 'rock';
+      imgOfComputerChoice.src = 'images/rock.png';
+      imgOfComputerChoice.style.transform = 'rotate(-90deg)';
       break;
     case 1:
       computerChoice =  'paper';
+      imgOfComputerChoice.src = 'images/paper.png';
+      imgOfComputerChoice.style.transform = 'rotate(90deg)';
       break;
     case 2:
       computerChoice =  'scissors';
+      imgOfComputerChoice.src = 'images/scissors.png';
+      imgOfComputerChoice.style.transform = 'rotate(-90deg)';
       break;
   }
+  imgContainer.appendChild(imgOfComputerChoice);
   return computerChoice;
 }
 
