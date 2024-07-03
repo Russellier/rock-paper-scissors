@@ -17,18 +17,19 @@ function getComputerChoice() {
   return computerChoice;
 }
 
-const playersOptions = document.querySelectorAll('.players-options button');
-
-playersOptions.forEach((choice) => {
-  choice.addEventListener('click', () => {
-    alert(choice.className);
-  });
-});
-
-function getHumanChoice() {
-  let humanChoice = prompt("Please choose between rock, paper, or scissors");
-  return humanChoice.toLowerCase();
+function getHumanChoice(e) {
+  const button = e.target.closest('button');
+  let humanChoice;
+  if (button) {
+    humanChoice = button.className;
+  }
+  return humanChoice;
 }
+
+// function getHumanChoice() {
+//   let humanChoice = prompt("Please choose between rock, paper, or scissors");
+//   return humanChoice.toLowerCase();
+// }
 
 let computerScore = 0;
 let humanScore = 0;
@@ -62,23 +63,25 @@ function playRound(computerChoice, humanChoice) {
     console.log('DRAW!');
   }
 
+  if (computerScore === 3 || humanScore === 3) {
+    console.log(computerScore > humanScore ? 'Game over. Computer wins!' :
+      'Game over. You win!');
+  }
+
   console.log('Computer: ' + computerScore + '   Human: ' + humanScore);
 }
 
-function playGame() {
-  for (let i = 0; i < 5; i++) {
-    playRound(getComputerChoice(), getHumanChoice());
-  }
+const playersOptions = document.querySelectorAll('.players-options button');
 
-  if (computerScore > humanScore) {
-    console.log('Computer WINS!');
-  }
-  else if (computerScore < humanScore) {
-    console.log('Human WINS!');
-  }
-  else {
-    console.log('Draw. No winner');
-  }
-}
+playersOptions.forEach((choice) => {
+  choice.addEventListener('click', (e) => {
+    const computerChoice = getComputerChoice();
+    const humanChoice = getHumanChoice(e);
+    playRound(computerChoice, humanChoice);
+  });
+});
 
-// playGame();
+const score = document.querySelector('.score');
+const displayWinner = document.createElement('div');
+displayWinner.textContent = 'insert winner here'
+score.appendChild(displayWinner);
