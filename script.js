@@ -17,6 +17,14 @@ function getComputerChoice() {
   return computerChoice;
 }
 
+const playersOptions = document.querySelectorAll('.players-options button');
+
+playersOptions.forEach((choice) => {
+  choice.addEventListener('click', () => {
+    alert(choice.className);
+  });
+});
+
 function getHumanChoice() {
   let humanChoice = prompt("Please choose between rock, paper, or scissors");
   return humanChoice.toLowerCase();
@@ -73,4 +81,4 @@ function playGame() {
   }
 }
 
-playGame();
+// playGame();
