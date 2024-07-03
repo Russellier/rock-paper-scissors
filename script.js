@@ -6,6 +6,10 @@ function getComputerChoice() {
   const existingImage = document.querySelector('.computers-choice img');
   let randomNumber = Math.floor(Math.random() * 3);
   let computerChoice;
+  
+  if (gameOver) {
+    return;
+  }
 
   if (existingImage) {
     imgContainer.removeChild(existingImage);
@@ -42,13 +46,9 @@ function getHumanChoice(e) {
   return humanChoice;
 }
 
-// function getHumanChoice() {
-//   let humanChoice = prompt("Please choose between rock, paper, or scissors");
-//   return humanChoice.toLowerCase();
-// }
-
 let computerScore = 0;
 let playerScore = 0;
+let gameOver = false;
 
 function playRound(computerChoice, humanChoice) {
 
@@ -58,33 +58,53 @@ function playRound(computerChoice, humanChoice) {
   const existingWinner = document.querySelector('.score div');
   const existingScore = document.querySelector('.score p');
 
+  if (gameOver) {
+    return;
+  }
+
   if (existingWinner) {
     scoreBox.removeChild(existingWinner);
   }
 
   if(existingScore) {
     scoreBox.removeChild(existingScore);
-  }
+  }  
 
   if ((computerChoice === 'rock' && humanChoice === 'paper') ||
   (computerChoice === 'paper' && humanChoice === 'scissors') ||
   (computerChoice === 'scissors' && humanChoice === 'rock')) {
-    displayWinner.textContent = 'You won'
     playerScore++;
+    if (playerScore < 5) {
+      displayWinner.textContent = 'You won'
+    }
+
   } else if ((computerChoice === 'rock' && humanChoice === 'scissors') ||
   (computerChoice === 'paper' && humanChoice === 'rock') || 
   (computerChoice === 'scissors' && humanChoice === 'paper')) {
-    displayWinner.textContent = 'You lost'
     computerScore++;
+    if (computerScore < 5) {
+      displayWinner.textContent = 'You lost'
+    }
+
   } else {
     displayWinner.textContent = 'Draw'
   }
   
-  displayScore.textContent = `Computer: ${computerScore}      Player: ${playerScore}`;
+  if (computerScore < 5 && playerScore < 5) {
+    displayScore.textContent = `Computer: ${computerScore}      Player: ${playerScore}`;
+  } else {
+      if (computerScore > playerScore) {
+        displayWinner.textContent = 'You lost the game.';
+      } else {
+        displayWinner.textContent = 'You won the game.';
+      }
+      displayScore.textContent = 'Click restart to play again.'
+      gameOver = true;
+  }
   scoreBox.appendChild(displayScore);
   scoreBox.insertBefore(displayWinner, document.querySelector('.score p'));
 
-  if (computerScore === 3 || playerScore === 3) {
+  if (computerScore === 5 || playerScore === 5) {
     console.log(computerScore > playerScore ? 'Game over. Computer wins!' :
       'Game over. You win!');
   }
